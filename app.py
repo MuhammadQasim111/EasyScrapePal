@@ -456,7 +456,7 @@ elif nav == "New Scrape":
                                 entities = gemini.extract_entities(result["text_content"])
                                 st.json(entities)
                             else:
-                                st.info("💡 Gemini AI is disabled. Set API key in Settings to enable.")
+                                st.info("💡 AI Analysis is currently unavailable.")
 
                         with tab4:
                             st.subheader("💾 Export Data")
