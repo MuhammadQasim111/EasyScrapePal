@@ -19,7 +19,24 @@ class GeminiService:
             return "Gemini API Key not provided."
         
         try:
-            prompt = f"Summarize the following text in 3-5 bullet points:\n\n{text[:10000]}"
+            prompt = f"""
+            You are an expert web content analyst. Analyze the following text scraped from a website and provide a comprehensive report.
+            
+            Please structure your response exactly as follows:
+            
+            ### 🎯 What is this website about?
+            (Provide a concise 1-2 sentence description of the main purpose or topic of this page)
+            
+            ### 📝 Key Information Contained
+            (Summarize the main content, facts, and details found on the page. Be specific and informative.)
+            
+            ### 🔑 Key Takeaways
+            (List 3-5 most important points or insights from this page)
+            
+            ---
+            Scraped Text Content:
+            {text[:15000]}
+            """
             response = self.model.generate_content(prompt)
             return response.text
         except Exception as e:

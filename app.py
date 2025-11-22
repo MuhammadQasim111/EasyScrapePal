@@ -9,7 +9,10 @@ from utils.helpers import redact_pii, convert_df
 from utils.ui_components import visual_selector_component, render_dashboard_stats
 
 # Load environment variables
-load_dotenv()
+# Explicitly specify path to .env file in the same directory as app.py
+current_dir = os.path.dirname(os.path.abspath(__file__))
+env_path = os.path.join(current_dir, '.env')
+load_dotenv(env_path)
 
 # Page Config
 st.set_page_config(
@@ -451,12 +454,17 @@ elif nav == "New Scrape":
                                 st.subheader("🤖 Gemini Summary")
                                 summary = gemini.summarize(result["text_content"])
                                 st.write(summary)
-                                
                                 st.subheader("🏷️ Extracted Entities")
                                 entities = gemini.extract_entities(result["text_content"])
                                 st.json(entities)
                             else:
-                                st.info("💡 AI Analysis is currently unavailable.")
+                                # Detailed diagnostics for API key issues
+                                api_key = os.getenv("GEMINI_API_KEY")
+                                if not api_key:
+                                    st.error("❌ Gemini API key not found. Ensure `.env` contains `GEMINI_API_KEY=your_key` and restart the app.")
+                                else:
+                                    st.error("❌ Gemini service could not be initialized. The provided API key may be invalid or expired. Verify the key in `.env`.")
+                                st.info("💡 AI Analysis is unavailable until a valid Gemini API key is configured.")
 
                         with tab4:
                             st.subheader("💾 Export Data")
