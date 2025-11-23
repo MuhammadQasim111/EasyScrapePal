@@ -102,28 +102,19 @@ st.markdown("""
         transform: translateX(5px);
     }
     
-    /* Main Title */
-    h1 {
-        color: white !important;
-        font-weight: 800;
-        font-size: 3rem;
-        text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-        margin-bottom: 2rem;
-        background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    /* Text - Default to dark for main content */
+    p, label, .stMarkdown, h1, h2, h3, li, span {
+        color: #1f2937 !important;
     }
     
-    /* Subheaders */
-    h2, h3 {
-        color: white !important;
-        font-weight: 700;
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-    }
-    
-    /* Text */
-    p, label, .stMarkdown {
+    /* Sidebar Text - Keep white */
+    [data-testid="stSidebar"] p, 
+    [data-testid="stSidebar"] label, 
+    [data-testid="stSidebar"] .stMarkdown,
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3,
+    [data-testid="stSidebar"] span {
         color: white !important;
     }
     

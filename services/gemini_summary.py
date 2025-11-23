@@ -7,7 +7,7 @@ class GeminiService:
         self.api_key = api_key or os.getenv("GEMINI_API_KEY")
         if self.api_key:
             genai.configure(api_key=self.api_key)
-            self.model = genai.GenerativeModel('gemini-2.0-flash-exp') # Using 2.0 Flash as requested/available
+            self.model = genai.GenerativeModel('gemini-2.5-flash-lite') # Using user-specified 2.5 Flash Lite model
         else:
             self.model = None
 
